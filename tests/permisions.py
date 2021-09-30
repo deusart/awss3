@@ -24,7 +24,6 @@ def run():
     try:
         s3 = boto3.resource(
             service_name = 's3',
-            region_name = config.region_name,
             aws_access_key_id = config.key.access,
             aws_secret_access_key = config.key.secret
         )
@@ -43,7 +42,7 @@ def run():
         test_log.Add(test_name, 'DONE')
 
     # listing objects
-    test_name = 'Listing objects permission:'    
+    test_name = 'Listing objects permission'    
     try:
         objects = bucket.objects.all()
     except Exception as error:
@@ -52,7 +51,7 @@ def run():
         test_log.Add(test_name, 'GRANTED')
 
     # save objects
-    test_name = 'Saving objects permission:'
+    test_name = 'Saving objects permission'
     try:
         key_name = 'Hello'
         file_content = b'Hello World'
@@ -70,7 +69,7 @@ def run():
             test_log.Add(test_name, 'FAILED', str(error))
 
     # delete objects
-    test_name = 'Deleting objects permission:'
+    test_name = 'Deleting objects permission'
     try:
         s3.Object(config.s3_bucket, key_name).delete()
     except Exception:
